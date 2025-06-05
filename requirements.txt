@@ -16,6 +16,7 @@ python-dotenv
 uvicorn
 pytest
 pyttsx3
+streamlit-audiorecorder
 regex==2023.12.25
 packaging==23.2
 groq==0.9.0
