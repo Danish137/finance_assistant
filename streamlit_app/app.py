@@ -4,7 +4,7 @@ import os
 import logging
 from dotenv import load_dotenv
 from groq import Groq
-from st_audiorec import st_audiorec
+from streamlit_audiorecorder import audiorecorder
 import base64
 
 # Logging setup
@@ -50,7 +50,7 @@ st.title('Multi-Agent Finance Assistant')
 
 ORCHESTRATOR_URL = "<YOUR_RAILWAY_ORCHESTRATOR_EXTERNAL_URL>"
 AUDIO_OUTPUT_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "audio_outputs")
-TEMP_AUDIO_FILE = "user_query_recording.wav" # Changed to .wav as st_audiorec outputs WAV
+TEMP_AUDIO_FILE = "user_query_recording.wav"  # We will save as WAV
 
 # Create AUDIO_OUTPUT_DIR if it doesn't exist
 if not os.path.exists(AUDIO_OUTPUT_DIR):
@@ -58,16 +58,18 @@ if not os.path.exists(AUDIO_OUTPUT_DIR):
 
 st.subheader("Speak your query:")
 
-w_audio_data = st_audiorec()
+# Use streamlit-audiorecorder here:
+audio_bytes = audiorecorder("Click to start recording", "Recording...")
 
 recorded_audio_path = os.path.join(AUDIO_OUTPUT_DIR, TEMP_AUDIO_FILE)
 
-if w_audio_data is not None:
+if audio_bytes:
     if st.button("Process Recorded Audio"):
         with st.spinner("Saving and Transcribing audio..."):
             try:
+                # Save recorded bytes to WAV file
                 with open(recorded_audio_path, "wb") as f:
-                    f.write(w_audio_data) # w_audio_data is bytes
+                    f.write(audio_bytes)
                 st.success(f"Audio saved to {recorded_audio_path}")
 
                 if GROQ_API_KEY:
@@ -87,7 +89,7 @@ user_query = st.session_state.get("transcribed_text", "")
 
 if st.button('Generate Morning Market Brief'):
     st.info('Generating market brief... Please wait, this may take a moment as agents communicate.')
-    
+
     params = {}
     if user_query:
         params["user_query"] = user_query
@@ -131,4 +133,4 @@ st.markdown(f"- **Retriever Agent:** {ORCHESTRATOR_URL.replace(':8000', ':8003')
 st.markdown(f"- **Analysis Agent:** {ORCHESTRATOR_URL.replace(':8000', ':8004')}")
 st.markdown(f"- **Language Agent:** {ORCHESTRATOR_URL.replace(':8000', ':8005')}")
 st.markdown(f"- **Voice Agent:** {ORCHESTRATOR_URL.replace(':8000', ':8006')}")
-st.markdown(f"- **Orchestrator:** {ORCHESTRATOR_URL}") 
+st.markdown(f"- **Orchestrator:** {ORCHESTRATOR_URL}")
