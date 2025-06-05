@@ -18,5 +18,4 @@ pytest
 pyttsx3
 regex==2023.12.25
 packaging==23.2
-st-audiorec
 groq==0.9.0
