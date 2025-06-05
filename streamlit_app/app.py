@@ -48,7 +48,7 @@ def transcribe_with_groq(audio_filepath, groq_api_key):
 st.set_page_config(layout="wide")
 st.title('Multi-Agent Finance Assistant')
 
-ORCHESTRATOR_URL = "http://127.0.0.1:8000"
+ORCHESTRATOR_URL = "<YOUR_RAILWAY_ORCHESTRATOR_EXTERNAL_URL>"
 AUDIO_OUTPUT_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "audio_outputs")
 TEMP_AUDIO_FILE = "user_query_recording.wav" # Changed to .wav as st_audiorec outputs WAV
 
