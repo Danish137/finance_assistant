@@ -103,7 +103,6 @@ pydub==0.25.1
 pygame==2.3.0
 Pygments==2.19.1
 pyparsing==3.2.3
-pypiwin32==223
 pytest==8.4.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.0
