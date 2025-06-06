@@ -18,7 +18,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 if not GROQ_API_KEY:
     raise ValueError("GROQ_API_KEY is not set. Please check your .env file.")
 
-ORCHESTRATOR_URL = "http://127.0.0.1:8007"
+ORCHESTRATOR_URL = os.getenv("ORCHESTRATOR_URL", "http://127.0.0.1:8007")
 
 # Transcription function
 def transcribe_with_groq(audio_filepath):

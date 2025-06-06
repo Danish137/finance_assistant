@@ -2,16 +2,17 @@ from fastapi import FastAPI, HTTPException
 import requests
 from pydantic import BaseModel
 from typing import List, Dict, Optional
+import os
 
 app = FastAPI(title="Orchestrator - Market Brief Workflow")
 
 # --- Agent Endpoints (Update these if your agents run on different ports/hosts) ---
-API_AGENT_URL = "http://localhost:8001"
-SCRAPING_AGENT_URL = "http://localhost:8002"
-RETRIEVER_AGENT_URL = "http://localhost:8003"
-ANALYSIS_AGENT_URL = "http://localhost:8004"
-LANGUAGE_AGENT_URL = "http://localhost:8005"
-VOICE_AGENT_URL = "http://localhost:8006"
+API_AGENT_URL = os.getenv("API_AGENT_URL", "http://127.0.0.1:8001")
+SCRAPING_AGENT_URL = os.getenv("SCRAPING_AGENT_URL", "http://127.0.0.1:8002")
+RETRIEVER_AGENT_URL = os.getenv("RETRIEVER_AGENT_URL", "http://127.0.0.1:8003")
+ANALYSIS_AGENT_URL = os.getenv("ANALYSIS_AGENT_URL", "http://127.0.0.1:8004")
+LANGUAGE_AGENT_URL = os.getenv("LANGUAGE_AGENT_URL", "http://127.0.0.1:8005")
+VOICE_AGENT_URL = os.getenv("VOICE_AGENT_URL", "http://127.0.0.1:8006")
 
 
 # Mock data for portfolio (since we don't have a live API yet)

@@ -1,8 +1,20 @@
-# Dockerfile (analysis_agent)
-FROM python:3.9-slim
+# Use an official Python runtime as a parent image
+FROM python:3.10-slim-buster
+
+# Set the working directory in the container
 WORKDIR /app
-COPY requirements.txt ./requirements.txt
+
+# Copy the requirements file into the container at /app
+COPY requirements.txt .
+
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-COPY agents/analysis_agent/ agents/analysis_agent/
+
+# Copy the agent's code into the container
+COPY agents/analysis_agent/ ./agents/analysis_agent/
+
+# Expose the port the Analysis Agent will listen on
 EXPOSE 8004
+
+# Command to run the Analysis Agent
 CMD ["uvicorn", "agents.analysis_agent.main:app", "--host", "0.0.0.0", "--port", "8004"] 

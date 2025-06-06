@@ -1,9 +1,22 @@
-# Dockerfile (streamlit_app)
-FROM python:3.11-slim
+# Use an official Python runtime as a parent image
+FROM python:3.10-slim-buster
+
+# Set the working directory in the container
 WORKDIR /app
-COPY requirements.txt ./requirements.txt
+
+# Copy the requirements file into the container at /app
+COPY requirements.txt .
+
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-COPY streamlit_app/ streamlit_app/
-COPY audio_outputs/ audio_outputs/
-EXPOSE 8501
-CMD ["streamlit", "run", "streamlit_app/app.py", "--server.port", "8501", "--server.enableCORS", "false"] 
+
+# Copy the gradio app code into the container
+COPY gradio_app/ ./gradio_app/
+COPY audio_outputs/ ./audio_outputs/
+COPY .env .
+
+# Expose the port the Gradio app will listen on
+EXPOSE 7860
+
+# Command to run the Gradio app
+CMD ["python", "gradio_app/app.py", "--host", "0.0.0.0", "--port", "7860", "--share", "False"] 
