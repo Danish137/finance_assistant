@@ -6,12 +6,13 @@ from typing import List, Dict, Optional
 app = FastAPI(title="Orchestrator - Market Brief Workflow")
 
 # --- Agent Endpoints (Update these if your agents run on different ports/hosts) ---
-API_AGENT_URL = "http://api-agent.railway.internal"
-SCRAPING_AGENT_URL = "http://scraping-agent.railway.internal"
-RETRIEVER_AGENT_URL = "http://retriever-agent.railway.internal"
-ANALYSIS_AGENT_URL = "http://analysis-agent.railway.internal"
-LANGUAGE_AGENT_URL = "http://language-agent.railway.internal"
-VOICE_AGENT_URL = "http://voice-agent.railway.internal"
+API_AGENT_URL = "http://localhost:8001"
+SCRAPING_AGENT_URL = "http://localhost:8002"
+RETRIEVER_AGENT_URL = "http://localhost:8003"
+ANALYSIS_AGENT_URL = "http://localhost:8004"
+LANGUAGE_AGENT_URL = "http://localhost:8005"
+VOICE_AGENT_URL = "http://localhost:8006"
+
 
 # Mock data for portfolio (since we don't have a live API yet)
 MOCK_PORTFOLIO_DATA = {
