@@ -84,7 +84,7 @@ opentelemetry-proto==1.34.0
 opentelemetry-sdk==1.34.0
 opentelemetry-semantic-conventions==0.55b0
 orjson==3.10.18
-packaging==23.2
+packaging>=23.2,<24.0
 pandas==2.3.0
 peewee==3.18.1
 pillow==11.2.1
