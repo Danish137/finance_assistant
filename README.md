@@ -11,6 +11,18 @@ A modular, open-source finance assistant designed to deliver personalized, spoke
 - **Dynamic Querying:** Supports user-specified queries for personalized brief generation.
 - **Open-Source & Free:** Built entirely with open-source and free-to-use technologies.
 
+## 🎥 Demo Video
+
+👉 [Watch the Loom video demo here](https://www.loom.com/share/47e0860102fd4abab84cf42198fec18c?sid=d5d74fc0-e5bf-438e-b16b-830acd4673e5)
+
+---
+
+## 📸 Screenshots
+
+| ![Screenshot1](screenshots/screenshot1.png) | ![Screenshot2](screenshots/screenshot2.png) |
+| :-----------------------------------------: | :-----------------------------------------: |
+|                Screenshot 1                 |                Screenshot 2                 |
+
 ## Architecture
 
 The system is composed of a Gradio frontend, a central Orchestrator, and several specialized FastAPI microservices acting as agents.
