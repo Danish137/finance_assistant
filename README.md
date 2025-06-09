@@ -88,7 +88,7 @@ This project runs as a collection of microservices. You need to start each agent
     ```
 8.  **Start the Gradio App (from `Gradio_app` directory):**
     ```bash
-    streamlit run app.py
+    python run app.py
     ```
 
 ## Framework & Toolkit Choices
