@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  # Gradio Frontend
+  gradio_app:
+    build:
+      context: .
+      dockerfile: ./gradio_app/Dockerfile
+    ports:
+      - "7860:7860" # Map container port 7860 to host port 7860
+    environment:
+      - ORCHESTRATOR_URL=http://orchestrator:8007 # Connect to orchestrator service by name
+    env_file:
+      - ./.env # Load GROQ_API_KEY from .env file
+    volumes:
+      - ./audio_outputs:/app/audio_outputs # Persist audio recordings
+
+  # Orchestrator Backend
+  orchestrator:
+    build:
+      context: .
+      dockerfile: ./orchestrator/Dockerfile
+    ports:
+      - "8007" # Expose internal port, no host mapping needed for this
+    environment:
+      - API_AGENT_URL=http://api_agent:8001
+      - SCRAPING_AGENT_URL=http://scraping_agent:8002
+      - RETRIEVER_AGENT_URL=http://retriever_agent:8003
+      - ANALYSIS_AGENT_URL=http://analysis_agent:8004
+      - LANGUAGE_AGENT_URL=http://language_agent:8005
+      - VOICE_AGENT_URL=http://voice_agent:8006
+    env_file:
+      - ./.env # In case Orchestrator needs other env vars later
+
+  # API Agent
+  api_agent:
+    build:
+      context: .
+      dockerfile: ./data_ingestion/api_agent/Dockerfile
+    ports:
+      - "8001"
+    env_file:
+      - ./.env # Add if API Agent needs keys (e.g., AlphaVantage)
+
+  # Scraping Agent
+  scraping_agent:
+    build:
+      context: .
+      dockerfile: ./data_ingestion/scraping_agent/Dockerfile
+    ports:
+      - "8002"
+    env_file:
+      - ./.env # Add if Scraping Agent needs keys
+
+  # Retriever Agent
+  retriever_agent:
+    build:
+      context: .
+      dockerfile: ./agents/retriever_agent/Dockerfile
+    ports:
+      - "8003"
+    env_file:
+      - ./.env # Add if Retriever Agent needs keys
+
+  # Analysis Agent
+  analysis_agent:
+    build:
+      context: .
+      dockerfile: ./agents/analysis_agent/Dockerfile
+    ports:
+      - "8004"
+    env_file:
+      - ./.env # Add if Analysis Agent needs keys
+
+  # Language Agent
+  language_agent:
+    build:
+      context: .
+      dockerfile: ./agents/language_agent/Dockerfile
+    ports:
+      - "8005"
+    env_file:
+      - ./.env # Add if Language Agent needs keys
+
+  # Voice Agent
+  voice_agent:
+    build:
+      context: .
+      dockerfile: ./agents/voice_agent/Dockerfile
+    ports:
+      - "8006"
+    env_file:
+      - ./.env # Add if Voice Agent needs keys 
