@@ -17,12 +17,6 @@ A modular, open-source finance assistant designed to deliver personalized, spoke
 
 ---
 
-## 📸 Screenshots
-
-| ![Screenshot1](screenshots/screenshot1.png) | ![Screenshot2](screenshots/screenshot2.png) |
-| :-----------------------------------------: | :-----------------------------------------: |
-|                Screenshot 1                 |                Screenshot 2                 |
-
 ## Architecture
 
 The system is composed of a Gradio frontend, a central Orchestrator, and several specialized FastAPI microservices acting as agents.
